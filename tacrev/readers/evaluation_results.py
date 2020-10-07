@@ -22,7 +22,7 @@ def load_evaluation_results(path: str,
             model_name = os.path.splitext(filename)[0]
             if filename.endswith(".jsonl"):
                 with open(result_path, "r") as result_f:
-                    clf_results = [json.loads(line.strip()) for line in result_f]
+                    clf_results = [json.loads(line.strip().replace("'", '"')) for line in result_f]
                     for result in clf_results:
                         model_preds[result["id"]][model_name] = result["label_pred"]
                         pred_labels[result["id"]][result["label_pred"]] += 1

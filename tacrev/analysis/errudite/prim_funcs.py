@@ -90,7 +90,11 @@ def SPAN_DISTANCE(span1: Tuple[int, int], span2: Tuple[int, int], absolute=False
     """
     output = None
     try:
-        output = span2[0] - span1[0]
+        arg_first = span1 if span1[0] < span2[0] else span2
+        arg_last = span1 if span1[0] > span2[0] else span2
+        output = arg_last[0] - arg_first[1]
+        # output = span2[0] - span1[0]
+
     except Exception as e:
         ex = Exception(f"Unknown exception from [ SPAN_DISTANCE ]: {e}")
         raise(ex)
